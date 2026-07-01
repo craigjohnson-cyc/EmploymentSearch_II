@@ -11,6 +11,17 @@
 <div class="container">
     <!--<h1>Welcome to EmploymentSearch</h1>-->
     <p><a class="btn btn-primary" href="{% url 'company_create' %}">Add New Company</a></p>
+    {% if companies %}
+    <div class="form-group">
+        <label for="company-select">Select Existing Company</label>
+        <select id="company-select" class="form-control" onchange="if(this.value) window.location.href=this.value;">
+            <option value="">-- Select a company --</option>
+            {% for company in companies %}
+                <option value="{% url 'company_update' company.company_key %}">{{ company.companyname }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {% endif %}
 </div>
 
 

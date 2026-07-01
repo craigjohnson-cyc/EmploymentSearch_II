@@ -35,12 +35,12 @@ class CompanyForm(forms.ModelForm):
             'companyname': forms.TextInput(attrs={'class':'form-control wide-input', 'style':'margin-bottom:5px'}),
             'phone': forms.TextInput(attrs={'class':'form-control wide-input', 'style':'margin-bottom:5px'}),
             'link': forms.Textarea(attrs={'class':'form-control', 'rows':4, 'style': 'margin-bottom:5px', 'cols':80}),
-            'address1': forms.Textarea(attrs={'class':'form-control wide-input', 'style': 'margin-bottom:5px'}),
+            'address1': forms.TextInput(attrs={'class':'form-control wide-input', 'style': 'margin-bottom:5px'}),
             'address2': forms.TextInput(attrs={'class':'form-control wide-input', 'style': 'margin-bottom:5px'}),
             'city': forms.TextInput(attrs={'class':'form-control wide-input', 'style':'margin-bottom:5px'}),
             'state': forms.TextInput(attrs={'class':'form-control wide-input', 'style':'margin-bottom:5px'}),
             'zip': forms.TextInput(attrs={'class':'form-control wide-input', 'style':'margin-bottom:5px'}),
-            'comment': forms.TextInput(attrs={'class':'form-control', 'rows':4, 'style': 'margin-bottom:5px', 'cols':80}),
+            'comment': forms.Textarea(attrs={'class':'form-control', 'rows':4, 'style': 'margin-bottom:5px', 'cols':80}),
             }
 
 

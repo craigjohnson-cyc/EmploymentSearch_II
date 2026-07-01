@@ -66,6 +66,8 @@
     <Content Include="app\templates\positions\_list.html" />
     <Content Include="app\templates\position_form.html" />
     <Content Include="app\templates\_company_form_fragment.html" />
+    <Content Include="app\templates\_company_form_wrapper.html" />
+    <Content Include="app\templates\_positions_grid.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

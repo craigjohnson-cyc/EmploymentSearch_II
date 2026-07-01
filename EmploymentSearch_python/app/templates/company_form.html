@@ -3,21 +3,125 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
+            {% if form.instance.pk %}
             <h2>
                 Edit Company
-                    <a class="btn btn-secondary" href="{% url 'company_list' %}">Exit</a>
+                <a class="btn btn-secondary" href="{% url 'company_list' %}">Exit</a>
 
             </h2>
+            {% else %}
+            <h2>
+                Add Company
+                <a class="btn btn-secondary" href="{% url 'company_list' %}">Exit</a>
+
+            </h2>
+            {% endif %}
+            <div id="formAlert"></div>
             <div id="company-form-container">
-                <form method="post" action="">
+                <form id="companyForm" method="post" action="" class="form-horizontal">
                     {% csrf_token %}
                     {% include "_company_form_fragment.html" %}
-                    <!--<button type="submit" class="btn btn-primary">Save</button>-->
                 </form>
             </div>
         </div>
 
         <script>
+            async function showAlert(message, type = 'success') {
+                const alertDiv = document.getElementById('formAlert');
+                alertDiv.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert">${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+                // auto-hide after 3 seconds
+                setTimeout(() => { alertDiv.innerHTML = ''; }, 3000);
+            }
+
+            function attachPositionsHandlers() {
+                // helper to get csrftoken
+                function getCookie(name) {
+                    const match = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+                    return match ? match.pop() : '';
+                }
+
+                async function postAction(url, body = null, isJson = false) {
+                    const headers = {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    };
+                    if (isJson) headers['Content-Type'] = 'application/json';
+
+                    const resp = await fetch(url, {
+                        method: 'POST',
+                        headers: headers,
+                        body: isJson ? JSON.stringify(body) : body
+                    });
+                    if (resp.redirected) {
+                        window.location.href = resp.url;
+                        return;
+                    }
+
+                    const contentType = resp.headers.get('content-type') || '';
+                    if (contentType.includes('application/json')) {
+                        const payload = await resp.json();
+                        if (payload.positions_html) {
+                            document.getElementById('positions-grid').innerHTML = payload.positions_html;
+                        }
+                        if (payload.message) {
+                            showAlert(payload.message, payload.ok ? 'success' : 'danger');
+                        }
+                        return;
+                    }
+
+                    if (resp.ok) {
+                        // fallback: reload to reflect change
+                        window.location.reload();
+                        return;
+                    }
+                    alert('Action failed: ' + resp.status);
+                }
+
+                // delegate clicks on reject/close links to send POST
+                document.addEventListener('click', function (e) {
+                    const a = e.target.closest('a');
+                    if (!a) return;
+                    const href = a.getAttribute('href');
+                    if (!href) return;
+
+                    // reject: ask for contactMethod and description, then POST JSON
+                    // should: Update Position
+                    //         Insert Contact
+                    if (href.includes('/positions/reject/')) {
+                        e.preventDefault();
+
+                        const contactMethod = prompt('Contact method (e.g., email, phone):', 'email');
+                        if (contactMethod === null) return; // cancelled
+                        const description = prompt('Description:', 'Rejection Received');
+                        if (description === null) return; // cancelled
+                        postAction(href, { contactMethod: contactMethod, description: description }, true);
+                        return;
+                    }
+
+                    // closed: ask for contactMethod and description, then POST JSON
+                    // should: Update Position
+                    //         Insert Contact
+                    if (href.includes('/positions/close/')) {
+                        e.preventDefault();
+                        const contactMethod = prompt('Contact method (e.g., email, phone):', 'email');
+                        if (contactMethod === null) return; // cancelled
+                        const description = prompt('Description:', 'Position Closed');
+                        if (description === null) return; // cancelled
+                        postAction(href, { contactMethod: contactMethod, description: description }, true);
+                        return;
+                    }
+                });
+
+                // attach add position handler
+                const positionAddBtn = document.getElementById('positionAdd');
+                if (positionAddBtn) {
+                    positionAddBtn.addEventListener('click', function () {
+                        const companyKey = this.dataset.companyKey;
+                        window.location.href = "{% url 'position_create' %}?company_key=" + encodeURIComponent(companyKey);
+                    });
+                }
+            }
+
             async function submitCompanyForm(e) {
                 e.preventDefault();
                 const form = e.target;
@@ -29,12 +133,27 @@
                     headers: { 'X-Requested-With': 'XMLHttpRequest' }
                 });
 
-                if (resp.headers.get('content-type')?.includes('application/json')) {
+                const contentType = resp.headers.get('content-type') || '';
+                if (contentType.includes('application/json')) {
                     const payload = await resp.json();
                     if (payload.redirect) {
                         window.location.href = payload.redirect;
                         return;
                     }
+                    if (payload.form_html) {
+                        document.getElementById('company-form-container').innerHTML = payload.form_html;
+                    }
+                    if (payload.positions_html) {
+                        document.getElementById('positions-grid').innerHTML = payload.positions_html;
+                    }
+                    if (payload.message) {
+                        showAlert(payload.message, payload.ok ? 'success' : 'danger');
+                    }
+                    // reattach handlers
+                    const newForm = document.getElementById('companyForm');
+                    if (newForm) newForm.addEventListener('submit', submitCompanyForm);
+                    attachPositionsHandlers();
+                    return;
                 }
 
                 if (resp.ok) {
@@ -44,6 +163,7 @@
                     // reattach handler to new form
                     const newForm = document.getElementById('companyForm');
                     if (newForm) newForm.addEventListener('submit', submitCompanyForm);
+                    attachPositionsHandlers();
                 } else {
                     // show generic error
                     alert('Error submitting form');
@@ -53,6 +173,7 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const form = document.getElementById('companyForm');
                 if (form) form.addEventListener('submit', submitCompanyForm);
+                attachPositionsHandlers();
             });
         </script>
 
@@ -65,87 +186,7 @@
                     Add Position
                 </button>
             </h2>
-            <div id="positions-grid">
-                <table class="table table-sm table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Job Title</th>
-                            <th>Role</th>
-                            <th>Pay Rate</th>
-                            <th>Application Date</th>
-                            <th>Last Contact Date</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for pos in positions %}
-                        <tr>
-                            <td>{{ pos.position }}</td>
-                            <td>{{ pos.note }}</td>
-                            <td>{{ pos.rate }}</td>
-                            <td>{{ pos.applicationdate }}</td>
-                            <td>{{ pos.lastcontactdate }}</td>
-                            <td>{{ pos.status }}</td>
-                            <td>
-                                <a class="btn btn-sm btn-outline-primary" href="{% url 'position_update' pos.position_key %}">Edit</a>
-                                <a class="btn btn-sm btn-outline-danger" href="{% url 'position_rejected' pos.position_key %}">Rejected</a>
-                                <a class="btn btn-sm btn-outline-danger" href="{% url 'position_closed' pos.position_key %}">Closed</a>
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr><td colspan="5">No positions.</td></tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-
-                <script>
-                    // CSRF helper to read the csrftoken cookie
-                    function getCookie(name) {
-                        const match = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-                        return match ? match.pop() : '';
-                    }
-
-                    async function postAction(url) {
-                        const resp = await fetch(url, {
-                            method: 'POST',
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'X-CSRFToken': getCookie('csrftoken')
-                            }
-                        });
-                        if (resp.redirected) {
-                            window.location.href = resp.url;
-                            return;
-                        }
-                        if (resp.ok) {
-                            // simple approach: reload to reflect change
-                            window.location.reload();
-                            return;
-                        }
-                        // fallback: show error
-                        alert('Action failed: ' + resp.status);
-                    }
-
-                    // delegate clicks on reject/close links to send POST
-                    document.addEventListener('click', function (e) {
-                        const a = e.target.closest('a');
-                        if (!a) return;
-                        const href = a.getAttribute('href');
-                        if (!href) return;
-                        if (href.includes('/positions/reject/') || href.includes('/positions/close/')) {
-                            e.preventDefault();
-                            postAction(href);
-                        }
-                    });
-                </script>
-                <script>
-                    document.getElementById('positionAdd').addEventListener('click', function () {
-                        const companyKey = this.dataset.companyKey;
-                        window.location.href = "{% url 'position_create' %}?company_key=" + encodeURIComponent(companyKey);
-                    });
-                </script>
-            </div>
+            {% include "_positions_grid.html" %}
         </div>
     </div>
 </div>

@@ -49,7 +49,7 @@ class Position(models.Model):
 class Contact(models.Model):
     contact_key = models.AutoField(db_column='Contact_key', primary_key=True)  
     position_key = models.ForeignKey('Position', on_delete=models.CASCADE, db_column='Position_key')  
-    person_key = models.ForeignKey('Person', on_delete=models.CASCADE, db_column='Person_key')  
+    person_key = models.ForeignKey('Person', on_delete=models.CASCADE, db_column='Person_key', null=True)  
     contactmethod = models.CharField(db_column='ContactMethod', max_length=5, db_collation='SQL_Latin1_General_CP1_CI_AS')  
     contactdate = models.DateTimeField(db_column='ContactDate')  
     description = models.TextField(db_column='Description', db_collation='SQL_Latin1_General_CP1_CI_AS')  

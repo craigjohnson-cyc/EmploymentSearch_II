@@ -18,12 +18,15 @@ from .models import Contact, Position, Person, Company
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+    # include companies for the index dropdown
+    companies = Company.objects.all().order_by('companyname')
     return render(
         request,
         'app/index.html',
         {
-            'title':'Home Page',
-            'year':datetime.now().year,
+            'title': 'Home Page',
+            'year': datetime.now().year,
+            'companies': companies,
         }
     )
 
@@ -82,20 +85,23 @@ def company_list(request):
 #     })
 
 def company_create(request):
+    # Use CompanyForm for consistency with company_update and to provide an empty form for GET
     if request.method == "POST":
-        Company.objects.create(
-           companyname=request.POST["companyname"],
-           phone=request.POST["phone"],
-           link=request.POST["link"],
-           address1=request.POST["address1"],
-           address2=request.POST["address2"],
-           city=request.POST["city"],
-           state=request.POST["state"],
-           zip=request.POST["zip"],
-           comment=request.POST["comment"],
-        )
-        return redirect("company_list")
-    return render(request, "company_form.html")
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            saved = form.save()
+            # after saving, stay on the company form page showing the saved company (edit mode)
+            form = CompanyForm(instance=saved)
+            positions = Position.objects.filter(company_key=saved.company_key)
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                form_html = render_to_string('_company_form_wrapper.html', {'form': form, 'company': saved}, request=request)
+                positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+                return JsonResponse({'ok': True, 'form_html': form_html, 'positions_html': positions_html, 'message': 'Company saved successfully'})
+            return render(request, "company_form.html", {"form": form, "company": saved, "positions": positions})
+    else:
+        form = CompanyForm()
+
+    return render(request, "company_form.html", {"form": form})
 
 
 # def company_update(request, id):
@@ -117,22 +123,29 @@ def company_create(request):
 
 def company_update(request, id):
     company = get_object_or_404(Company, pk=id)
-    positions = Position.objects.filter(company_key=company)
+    positions = Position.objects.filter(company_key=company.company_key)
 
     if request.method == "POST":
         if 'cancel' in request.POST:
-            return redirect("company_list")
+            return render(request, "company_form.html", {"form": CompanyForm(instance=company), "company": company, "positions": positions})
         form = CompanyForm(request.POST, instance=company)
         if form.is_valid():
-            form.save()
-            # if AJAX, return a JsonResponse indicating success and redirect URL
+            saved = form.save()
+            # After saving, stay on the company form page showing saved data
+            form = CompanyForm(instance=saved)
+            positions = Position.objects.filter(company_key=saved.company_key)
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                return JsonResponse({'success': True, 'redirect': redirect("company_list").url})
-            return redirect("company_list")
+                form_html = render_to_string('_company_form_wrapper.html', {'form': form, 'company': saved}, request=request)
+                positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+                return JsonResponse({'ok': True, 'form_html': form_html, 'positions_html': positions_html, 'message': 'Company saved successfully'})
+            return render(request, "company_form.html", {"form": form, "company": saved, "positions": positions})
         else:
-            # if AJAX, return the form HTML fragment with errors so client can replace
+            # return the form with errors so client can replace
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                return render(request, "_company_form_fragment.html", {"form": form, "company": company, "positions": positions})
+                form_html = render_to_string('_company_form_wrapper.html', {'form': form, 'company': company}, request=request)
+                positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+                return JsonResponse({'ok': False, 'form_html': form_html, 'positions_html': positions_html, 'message': 'Validation errors - please correct and try again'})
+            return render(request, "company_form.html", {"form": form, "company": company, "positions": positions})
     else:
         form = CompanyForm(instance=company)
     return render(request, "company_form.html", {"form": form, "company": company, "positions": positions})
@@ -246,14 +259,39 @@ def position_rejected(request, id=None):
     Contact.objects.create(
         position_key=pos,
         contactdate=timezone.now(),
-        contactmethod='email',
-        description='Rejection Received'
+        contactmethod=data.get('contactMethod', 'email'),
+        description=data.get('description', 'Rejection Received')
     )
 
-    # re-render positions list partial
+    # re-render positions grid partial
     positions = Position.objects.filter(company_key=pos.company_key).order_by('-statusdate')
-    html = render_to_string('positions/_list.html', {'positions': positions}, request=request)
-    return JsonResponse({'ok': True, 'html': html})
+    positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+    return JsonResponse({'ok': True, 'positions_html': positions_html})
+
+@require_POST
+def position_closed(request, id=None):
+    data = json.loads(request.body.decode()) if request.content_type == 'application/json' else request.POST
+    pos_pk = id or data.get('position_key')
+    # find and update Position
+    pos = get_object_or_404(Position, pk=pos_pk)
+    pos.status = data.get('status', 'Closed')
+    pos.statusdate = timezone.now()
+    pos.lastcontactdate = timezone.now()
+    pos.save()
+
+    # create Contact linked to this Position
+    Contact.objects.create(
+        position_key=pos,
+        contactdate=timezone.now(),
+        contactmethod=data.get('contactMethod', 'email'),
+        description=data.get('description', 'Position Closed')
+    )
+
+    # re-render positions grid partial
+    positions = Position.objects.filter(company_key=pos.company_key).order_by('-statusdate')
+    positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+    return JsonResponse({'ok': True, 'positions_html': positions_html})
+
 
 @require_POST
 def position_close(request, id=None):
@@ -271,14 +309,14 @@ def position_close(request, id=None):
     Contact.objects.create(
         position_key=pos,
         contactdate=timezone.now(),
-        contactmethod='email',
-        description='Position Closed'
+        contactmethod=data.get('contactMethod', 'email'),
+        description=data.get('description', 'Position Closed')
     )
 
-    # re-render positions list partial
+    # re-render positions grid partial
     positions = Position.objects.filter(company_key=pos.company_key).order_by('-statusdate')
-    html = render_to_string('positions/_list.html', {'positions': positions}, request=request)
-    return JsonResponse({'ok': True, 'html': html})
+    positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+    return JsonResponse({'ok': True, 'positions_html': positions_html})
 
 
 
