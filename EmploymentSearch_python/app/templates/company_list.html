@@ -1,0 +1,44 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container">
+  <h2>Companies</h2>
+
+  <!--<div class="mb-3">
+    <input id="companySearch" class="form-control" placeholder="Search companies by name..." />
+  </div>-->
+
+  <div id="companies-grid">
+    {% include 'companies/_list.html' %}
+  </div>
+</div>
+
+<script>
+  async function searchCompanies(q) {
+    const params = new URLSearchParams({ q });
+    const resp = await fetch(window.location.pathname + '?' + params.toString(), {
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    });
+    if (!resp.ok) return;
+    const html = await resp.text();
+    document.getElementById('companies-grid').innerHTML = html;
+  }
+
+  let timer = null;
+  document.getElementById('companySearch').addEventListener('input', function (e) {
+    const q = e.target.value;
+    clearTimeout(timer);
+    timer = setTimeout(() => searchCompanies(q), 300);
+  });
+
+  // delegate click on rows to navigate to company update
+  document.addEventListener('click', function (e) {
+    const tr = e.target.closest('tr[data-href]');
+    if (!tr) return;
+    // if the click was on a link or button, let it through
+    if (e.target.closest('a') || e.target.closest('button')) return;
+    const href = tr.dataset.href;
+    if (href) window.location.href = href;
+  });
+</script>
+{% endblock %}

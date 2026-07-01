@@ -1,0 +1,17 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>Employment Search</h1>
+    <!--<p class="lead">Django is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://www.djangoproject.com/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>-->
+</div>
+
+<div class="container">
+    <!--<h1>Welcome to EmploymentSearch</h1>-->
+    <p><a class="btn btn-primary" href="{% url 'company_create' %}">Add New Company</a></p>
+</div>
+
+
+{% endblock %}

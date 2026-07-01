@@ -1,0 +1,23 @@
+{% extends "app/layout.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Job Position</h2>
+            <form id="positionForm" method="post" class="form-horizontal">
+                {% csrf_token %}
+                {{ form.as_div }}
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary"
+                    onclick="if (history.length > 1) { history.back(); } else { window.location.href='{% url 'company_list' %}'; }">Exit
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
