@@ -43,7 +43,7 @@ urlpatterns = [
     path("positions/update/<int:id>/", views.position_update, name="position_update"),
     path("positions/delete/<int:id>/", views.position_delete, name="position_delete"),
     path("positions/reject/<int:id>/", views.position_rejected, name="position_rejected"),
-    path("positions/close/<int:id>/", views.position_close,   name="position_closed"),
+    path("positions/close/<int:id>/", views.position_closed,   name="position_closed"),
 
     path("persons/", views.person_list, name="person_list"),
     path("persons/create/", views.person_create, name="person_create"),

@@ -1,9 +1,52 @@
 <div id="positions-grid">
+{% load static %}
+
+<style>
+    /* clamp to ~4 lines (15ch width) */
+    .note-clamp {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4; /* show up to 4 lines */
+        overflow: hidden;
+        width: 15ch; /* approx 15 characters wide */
+        word-break: break-word;
+        white-space: normal;
+    }
+
+    /* styled tooltip for full note text */
+    .tooltip-wrapper { position: relative; display: inline-block; }
+    .styled-tooltip {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        margin-top: 6px;
+        z-index: 2000;
+        background: rgba(0,0,0,0.85);
+        color: #fff;
+        padding: 8px 10px;
+        border-radius: 4px;
+        white-space: pre-wrap;
+        max-width: 40ch;
+        display: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .styled-tooltip::before {
+        content: "";
+        position: absolute;
+        top: -6px; /* position above the tooltip box */
+        left: 10px; /* align near left edge */
+        border-width: 6px;
+        border-style: solid;
+        border-color: transparent transparent rgba(0,0,0,0.85) transparent;
+    }
+    .tooltip-wrapper:hover .styled-tooltip { display: block; }
+</style>
+
     <table class="table table-sm table-striped table-bordered">
         <thead>
             <tr>
                 <th>Job Title</th>
-                <th>Role</th>
+                <th>Note</th>
                 <th>Pay Rate</th>
                 <th>Application Date</th>
                 <th>Last Contact Date</th>
@@ -15,10 +58,10 @@
             {% for pos in positions %}
             <tr>
                 <td>{{ pos.position }}</td>
-                <td>{{ pos.note }}</td>
+                <td><span class="note-clamp" title="{{ pos.note }}">{{ pos.note }}</span></td>
                 <td>{{ pos.rate }}</td>
-                <td>{{ pos.applicationdate }}</td>
-                <td>{{ pos.lastcontactdate }}</td>
+                <td>{% if pos.applicationdate %}{{ pos.applicationdate|date:"m-d-Y" }}{% endif %}</td>
+                <td>{% if pos.lastcontactdate %}{{ pos.lastcontactdate|date:"m-d-Y" }}{% endif %}</td>
                 <td>{{ pos.status }}</td>
                 <td>
                     <a class="btn btn-sm btn-outline-primary" href="{% url 'position_update' pos.position_key %}">Edit</a>
@@ -27,7 +70,7 @@
                 </td>
             </tr>
             {% empty %}
-            <tr><td colspan="7">No positions.</td></tr>
+            <tr><td colspan="8">No positions.</td></tr>
             {% endfor %}
         </tbody>
     </table>

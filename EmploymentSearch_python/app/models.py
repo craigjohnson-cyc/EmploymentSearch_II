@@ -34,12 +34,12 @@ class Position(models.Model):
     position_key = models.AutoField(db_column='Position_Key', primary_key=True)  
     company_key = models.ForeignKey('Company', on_delete=models.CASCADE, db_column='Company_Key')  
     position = models.CharField(db_column='Position', max_length=200, db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    note = models.TextField(db_column='Note', db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    rate = models.CharField(db_column='Rate', max_length=25, db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    link = models.TextField(db_column='Link', db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    note = models.TextField(db_column='Note', blank=True, db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    rate = models.CharField(db_column='Rate', blank=True, max_length=25, db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    link = models.TextField(db_column='Link', blank=True, db_collation='SQL_Latin1_General_CP1_CI_AS')  
     applicationdate = models.DateTimeField(db_column='ApplicationDate')  
     lastcontactdate = models.DateTimeField(db_column='LastContactDate')  
-    status = models.CharField(db_column='Status', max_length=10, db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    status = models.CharField(db_column='Status', blank=True, max_length=10, db_collation='SQL_Latin1_General_CP1_CI_AS')  
     statusdate = models.DateTimeField(db_column='StatusDate')  
 
     class Meta:
@@ -50,9 +50,9 @@ class Contact(models.Model):
     contact_key = models.AutoField(db_column='Contact_key', primary_key=True)  
     position_key = models.ForeignKey('Position', on_delete=models.CASCADE, db_column='Position_key')  
     person_key = models.ForeignKey('Person', on_delete=models.CASCADE, db_column='Person_key', null=True)  
-    contactmethod = models.CharField(db_column='ContactMethod', max_length=5, db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    contactmethod = models.CharField(db_column='ContactMethod', blank=True, max_length=5, db_collation='SQL_Latin1_General_CP1_CI_AS')  
     contactdate = models.DateTimeField(db_column='ContactDate')  
-    description = models.TextField(db_column='Description', db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    description = models.TextField(db_column='Description', blank=True, db_collation='SQL_Latin1_General_CP1_CI_AS')  
 
     class Meta:
         managed = False
@@ -63,13 +63,13 @@ class Person(models.Model):
     position_key = models.ForeignKey('Position', on_delete=models.CASCADE, db_column='Position_key')  
     company_key = models.ForeignKey('Company', on_delete=models.CASCADE, db_column='Company_key')  
     name = models.CharField(db_column='Name', max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    phoneoffice = models.CharField(db_column='PhoneOffice', max_length=13, db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    phonecell = models.CharField(db_column='PhoneCell', max_length=13, db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    preferedphone = models.CharField(db_column='PreferedPhone', max_length=6, db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    preferedcontact = models.CharField(db_column='PreferedContact', max_length=6, db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    email = models.TextField(db_column='Email', db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    linkedin = models.TextField(db_column='LinkedIn', db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    comment = models.TextField(db_column='Comment', db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    phoneoffice = models.CharField(db_column='PhoneOffice', blank=True, max_length=13, db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    phonecell = models.CharField(db_column='PhoneCell', blank=True, max_length=13, db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    preferedphone = models.CharField(db_column='PreferedPhone', blank=True, max_length=6, db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    preferedcontact = models.CharField(db_column='PreferedContact', blank=True, max_length=6, db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    email = models.TextField(db_column='Email', blank=True, db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    linkedin = models.TextField(db_column='LinkedIn', blank=True, db_collation='SQL_Latin1_General_CP1_CI_AS')  
+    comment = models.TextField(db_column='Comment', blank=True, db_collation='SQL_Latin1_General_CP1_CI_AS')  
 
     class Meta:
         managed = False

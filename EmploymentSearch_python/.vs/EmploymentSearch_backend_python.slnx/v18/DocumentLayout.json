@@ -3,40 +3,55 @@
   "WorkspaceRootPath": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\models.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\models.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\views.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\views.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\app\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\templates\\app\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_positions_grid.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\templates\\_positions_grid.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\position_form.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\templates\\position_form.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\views.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\views.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\company_form.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\templates\\company_form.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_company_form_wrapper.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\templates\\_company_form_wrapper.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\forms.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\forms.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\app\\layout.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\templates\\app\\layout.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_company_form_fragment.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\templates\\_company_form_fragment.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\app\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\templates\\app\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\models.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\models.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\app\\layout.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\templates\\app\\layout.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_company_form_wrapper.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\templates\\_company_form_wrapper.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Lenovo\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\django\\template\\defaulttags.py||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\EmploymentSearch_backend_python\\urls.py||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:EmploymentSearch_backend_python\\urls.py||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\urls.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:urls.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\forms.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{04AB7DF1-3D07-4634-97EB-D60B8021A62E}|EmploymentSearch_backend_python.pyproj|solutionrelative:app\\forms.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +61,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,93 +73,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "models.py",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\models.py",
-              "RelativeDocumentMoniker": "app\\models.py",
-              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\models.py",
-              "RelativeToolTip": "app\\models.py",
-              "ViewState": "AgIAACQAAAAAAAAAAIApwC0AAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2026-07-01T16:28:15.329Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "forms.py",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\forms.py",
-              "RelativeDocumentMoniker": "app\\forms.py",
-              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\forms.py",
-              "RelativeToolTip": "app\\forms.py",
-              "ViewState": "AgIAAD8AAAAAAAAAAIApwCoAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2026-07-01T16:07:47.187Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "_positions_grid.html",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_positions_grid.html",
-              "RelativeDocumentMoniker": "app\\templates\\_positions_grid.html",
-              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_positions_grid.html",
-              "RelativeToolTip": "app\\templates\\_positions_grid.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Title": "position_form.html",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\position_form.html",
+              "RelativeDocumentMoniker": "app\\templates\\position_form.html",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\position_form.html",
+              "RelativeToolTip": "app\\templates\\position_form.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-01T15:55:44.278Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "_company_form_wrapper.html",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_company_form_wrapper.html",
-              "RelativeDocumentMoniker": "app\\templates\\_company_form_wrapper.html",
-              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_company_form_wrapper.html",
-              "RelativeToolTip": "app\\templates\\_company_form_wrapper.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-01T15:55:32.461Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "company_form.html",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\company_form.html",
-              "RelativeDocumentMoniker": "app\\templates\\company_form.html",
-              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\company_form.html",
-              "RelativeToolTip": "app\\templates\\company_form.html",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAkwBYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-01T15:05:53.127Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "layout.html",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\app\\layout.html",
-              "RelativeDocumentMoniker": "app\\templates\\app\\layout.html",
-              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\app\\layout.html",
-              "RelativeToolTip": "app\\templates\\app\\layout.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-07-01T14:58:43.326Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "views.py",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\views.py",
-              "RelativeDocumentMoniker": "app\\views.py",
-              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\views.py",
-              "RelativeToolTip": "app\\views.py",
-              "ViewState": "AgIAABsBAAAAAAAAAAAkwDUBAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2026-07-01T14:55:01.824Z",
+              "WhenOpened": "2026-07-01T18:42:22.923Z",
               "EditorCaption": ""
             },
             {
@@ -163,15 +100,139 @@
             {
               "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "models.py",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\models.py",
+              "RelativeDocumentMoniker": "app\\models.py",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\models.py",
+              "RelativeToolTip": "app\\models.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2026-07-01T16:28:15.329Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_positions_grid.html",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_positions_grid.html",
+              "RelativeDocumentMoniker": "app\\templates\\_positions_grid.html",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_positions_grid.html",
+              "RelativeToolTip": "app\\templates\\_positions_grid.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-01T15:55:44.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "company_form.html",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\company_form.html",
+              "RelativeDocumentMoniker": "app\\templates\\company_form.html",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\company_form.html",
+              "RelativeToolTip": "app\\templates\\company_form.html",
+              "ViewState": "AgIAAA0AAAAAAAAAAIAswBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-01T15:05:53.127Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\app\\index.html",
               "RelativeDocumentMoniker": "app\\templates\\app\\index.html",
               "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\app\\index.html",
               "RelativeToolTip": "app\\templates\\app\\index.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAARwBgAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2026-07-01T14:51:47.075Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "layout.html",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\app\\layout.html",
+              "RelativeDocumentMoniker": "app\\templates\\app\\layout.html",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\app\\layout.html",
+              "RelativeToolTip": "app\\templates\\app\\layout.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-01T14:58:43.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "views.py",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\views.py",
+              "RelativeDocumentMoniker": "app\\views.py",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\views.py",
+              "RelativeToolTip": "app\\views.py",
+              "ViewState": "AgIAANQAAAAAAAAAAAAvwDkBAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2026-07-01T14:55:01.824Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_company_form_wrapper.html",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_company_form_wrapper.html",
+              "RelativeDocumentMoniker": "app\\templates\\_company_form_wrapper.html",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\templates\\_company_form_wrapper.html",
+              "RelativeToolTip": "app\\templates\\_company_form_wrapper.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-07-01T15:55:32.461Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "forms.py",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\forms.py",
+              "RelativeDocumentMoniker": "app\\forms.py",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\app\\forms.py",
+              "RelativeToolTip": "app\\forms.py",
+              "ViewState": "AgIAAD8AAAAAAAAAAIApwCoAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2026-07-01T16:07:47.187Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "defaulttags.py",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\django\\template\\defaulttags.py",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\django\\template\\defaulttags.py",
+              "ToolTip": "C:\\Users\\Lenovo\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\django\\template\\defaulttags.py",
+              "RelativeToolTip": "..\\..\\..\\..\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\django\\template\\defaulttags.py",
+              "ViewState": "AgIAAPABAAAAAAAAAAAYwP4BAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2026-07-01T19:00:55.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "urls.py",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\EmploymentSearch_backend_python\\urls.py",
+              "RelativeDocumentMoniker": "EmploymentSearch_backend_python\\urls.py",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\EmploymentSearch_backend_python\\urls.py",
+              "RelativeToolTip": "EmploymentSearch_backend_python\\urls.py",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAYwDUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2026-07-01T19:00:04.143Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "urls.py",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\urls.py",
+              "RelativeDocumentMoniker": "urls.py",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\EmploymentSearch_II\\EmploymentSearch_python\\urls.py",
+              "RelativeToolTip": "urls.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2026-07-01T18:54:51.157Z"
             }
           ]
         }

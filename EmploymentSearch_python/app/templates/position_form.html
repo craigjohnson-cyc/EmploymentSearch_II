@@ -5,12 +5,13 @@
     <div class="row">
         <div class="col-md-6">
             <h2>Job Position</h2>
-            <form id="positionForm" method="post" class="form-horizontal">
+            <form id="positionForm" method="post" action="{% url 'position_create' %}" class="form-horizontal">
                 {% csrf_token %}
                 {{ form.as_div }}
+                <input type="hidden" name="company_key" value="{{ company_key }}">
                 <button type="submit" class="btn btn-primary">Save</button>
                 <button type="button" class="btn btn-secondary"
-                    onclick="if (history.length > 1) { history.back(); } else { window.location.href='{% url 'company_list' %}'; }">Exit
+                    onclick="if (history.length > 1) { history.back(); } else { window.location.href={% if company_pk %}'{% url 'company_update' company_pk %}'{% else %}'{% url 'company_list' %}'{% endif %}; }">Exit
                 </button>
 
             </form>

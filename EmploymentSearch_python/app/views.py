@@ -200,11 +200,23 @@ def position_list(request):
 
 def position_create(request):
     company_key = request.GET.get('company_key') or request.POST.get('company_key')
+    company_pk = None
+    if company_key:
+        try:
+            company_obj = Company.objects.get(company_key=company_key)
+            company_pk = company_obj.pk
+        except Company.DoesNotExist:
+            company_pk = None
+
     if request.method == "POST":
         form = PositionForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("history.back()")
+            saved = form.save()
+            # after saving, return to the company form (edit) if possible
+            if company_pk:
+                return redirect('company_update', id=company_pk)
+            # fallback to company list
+            return redirect('company_list')
     else:
         # generate a new position_key (simple approach)
         # max_key = Position.objects.aggregate(Max('position_key'))['position_key__max'] or 0
@@ -212,9 +224,14 @@ def position_create(request):
         initial = {}
         if company_key:
             initial['company_key'] = company_key
+        # default dates to today for new positions
+        today = timezone.now().date()
+        initial['applicationdate'] = today
+        initial['lastcontactdate'] = today
+        initial['statusdate'] = today
         # initial['position_key'] = new_key
         form = PositionForm(initial=initial)
-    return render(request, "position_form.html", {"form": form})
+    return render(request, "position_form.html", {"form": form, "company_key": company_key, "company_pk": company_pk})
 
 def position_update(request, id):
     position = get_object_or_404(Position, position_key=id)
@@ -226,18 +243,7 @@ def position_update(request, id):
     else:
         form = PositionForm(instance=position)
     return render(request, "position_form.html", {"position": position, "form": form})
-    #    position.company_key=request.POST["company_key"]
-    #    position.position = request.POST["position"]   # job title
-    #    position.note=request.POST["note"]
-    #    position.rate=request.POST["rate"]
-    #    position.link=request.POST["link"]
-    #    position.applicationDate=request.POST["applicationDate"]
-    #    position.lastContactDate=request.POST["lastContactDate"]
-    #    position.status=request.POST["status"]
-    #    position.statusDate=request.POST["statusDate"]
-    #    position.save()
-    #    # return redirect("position_list")
-    # return render(request, "position_form.html", {"position": position})
+
 
 def position_delete(request, id):
     position = get_object_or_404(Position, position_key=id)
@@ -293,25 +299,25 @@ def position_closed(request, id=None):
     return JsonResponse({'ok': True, 'positions_html': positions_html})
 
 
-@require_POST
-def position_close(request, id=None):
-    data = json.loads(request.body.decode()) if request.content_type == 'application/json' else request.POST
-    pos_pk = id or data.get('position_key')
-    # find and update Position
-    pos = get_object_or_404(Position, pk=pos_pk)
-    pos.status = data.get('status', 'Closed')
-    pos.statusdate = timezone.now()
-    pos.lastcontactdate = timezone.now()
-    pos.save()
+# @require_POST
+# def position_close(request, id=None):
+#     data = json.loads(request.body.decode()) if request.content_type == 'application/json' else request.POST
+#     pos_pk = id or data.get('position_key')
+#     # find and update Position
+#     pos = get_object_or_404(Position, pk=pos_pk)
+#     pos.status = data.get('status', 'Closed')
+#     pos.statusdate = timezone.now()
+#     pos.lastcontactdate = timezone.now()
+#     pos.save()
 
 
-    # create Contact linked to this Position
-    Contact.objects.create(
-        position_key=pos,
-        contactdate=timezone.now(),
-        contactmethod=data.get('contactMethod', 'email'),
-        description=data.get('description', 'Position Closed')
-    )
+#     # create Contact linked to this Position
+#     Contact.objects.create(
+#         position_key=pos,
+#         contactdate=timezone.now(),
+#         contactmethod=data.get('contactMethod', 'email'),
+#         description=data.get('description', 'Position Closed')
+#     )
 
     # re-render positions grid partial
     positions = Position.objects.filter(company_key=pos.company_key).order_by('-statusdate')
