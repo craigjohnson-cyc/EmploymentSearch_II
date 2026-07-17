@@ -6,13 +6,13 @@
             {% if form.instance.pk %}
             <h2>
                 Edit Company
-                <a class="btn btn-secondary" href="{% url 'company_list' %}">Exit</a>
+                <a class="btn btn-secondary" href="{% url 'companies/company_list' %}">Exit</a>
 
             </h2>
             {% else %}
             <h2>
                 Add Company
-                <a class="btn btn-secondary" href="{% url 'company_list' %}">Exit</a>
+                <a class="btn btn-secondary" href="{% url 'companies/company_list' %}">Exit</a>
 
             </h2>
             {% endif %}
@@ -20,7 +20,7 @@
             <div id="company-form-container">
                 <form id="companyForm" method="post" action="" class="form-horizontal">
                     {% csrf_token %}
-                    {% include "_company_form_fragment.html" %}
+                    {% include "companies/_company_form_fragment.html" %}
                 </form>
             </div>
         </div>
@@ -186,7 +186,7 @@
                     Add Position
                 </button>
             </h2>
-            {% include "_positions_grid.html" %}
+            {% include "positions/_positions_grid.html" %}
         </div>
     </div>
 </div>

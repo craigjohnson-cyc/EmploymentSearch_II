@@ -63,7 +63,7 @@ def company_list(request):
     paginator = Paginator(companies, 17)               # 17 rows per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)         # safe: handles invalid page numbers
-    return render(request, 'company_list.html', {'page_obj': page_obj})
+    return render(request, 'companies/company_list.html', {'page_obj': page_obj})
 
 
 def company_search(request):
@@ -87,7 +87,7 @@ def company_create(request):
             positions = Position.objects.filter(company_key=saved.company_key)
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 form_html = render_to_string('_company_form_wrapper.html', {'form': form, 'company': saved}, request=request)
-                positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+                positions_html = render_to_string('positions/_positions_grid.html', {'positions': positions}, request=request)
                 return JsonResponse({'ok': True, 'form_html': form_html, 'positions_html': positions_html, 'message': 'Company saved successfully'})
             return render(request, "company_form.html", {"form": form, "company": saved, "positions": positions})
     else:
@@ -128,25 +128,25 @@ def company_update(request, id):
             positions = Position.objects.filter(company_key=saved.company_key)
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 form_html = render_to_string('_company_form_wrapper.html', {'form': form, 'company': saved}, request=request)
-                positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+                positions_html = render_to_string('positions/_positions_grid.html', {'positions': positions}, request=request)
                 return JsonResponse({'ok': True, 'form_html': form_html, 'positions_html': positions_html, 'message': 'Company saved successfully'})
             return render(request, "company_form.html", {"form": form, "company": saved, "positions": positions})
         else:
             # return the form with errors so client can replace
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 form_html = render_to_string('_company_form_wrapper.html', {'form': form, 'company': company}, request=request)
-                positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+                positions_html = render_to_string('positions/_positions_grid.html', {'positions': positions}, request=request)
                 return JsonResponse({'ok': False, 'form_html': form_html, 'positions_html': positions_html, 'message': 'Validation errors - please correct and try again'})
             return render(request, "company_form.html", {"form": form, "company": company, "positions": positions})
     else:
         form = CompanyForm(instance=company)
-    return render(request, "company_form.html", {"form": form, "company": company, "positions": positions})
+    return render(request, "companies/company_form.html", {"form": form, "company": company, "positions": positions})
 
 
 def company_delete(request, id):
     company = get_object_or_404(Company, company_key=id)
     company.delete()
-    return redirect("company_list")
+    return redirect("companies/company_list")
 
 # CRUD views for Contact model
 
@@ -208,7 +208,7 @@ def position_create(request):
             if company_pk:
                 return redirect('company_update', id=company_pk)
             # fallback to company list
-            return redirect('company_list')
+            return redirect('companies/company_list')
     else:
         # generate a new position_key (simple approach)
         # max_key = Position.objects.aggregate(Max('position_key'))['position_key__max'] or 0
@@ -223,7 +223,7 @@ def position_create(request):
         initial['statusdate'] = today
         # initial['position_key'] = new_key
         form = PositionForm(initial=initial)
-    return render(request, "position_form.html", {"form": form, "company_key": company_key, "company_pk": company_pk})
+    return render(request, "positions/position_form.html", {"form": form, "company_key": company_key, "company_pk": company_pk})
 
 def position_update(request, id):
     position = get_object_or_404(Position, position_key=id)
@@ -234,7 +234,7 @@ def position_update(request, id):
             return redirect("position_list")
     else:
         form = PositionForm(instance=position)
-    return render(request, "position_form.html", {"position": position, "form": form})
+    return render(request, "positions/position_form.html", {"position": position, "form": form})
 
 
 def position_delete(request, id):
@@ -263,7 +263,7 @@ def position_rejected(request, id=None):
 
     # re-render positions grid partial
     positions = Position.objects.filter(company_key=pos.company_key).order_by('-statusdate')
-    positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+    positions_html = render_to_string('positions/_positions_grid.html', {'positions': positions}, request=request)
     return JsonResponse({'ok': True, 'positions_html': positions_html})
 
 @require_POST
@@ -287,7 +287,7 @@ def position_closed(request, id=None):
 
     # re-render positions grid partial
     positions = Position.objects.filter(company_key=pos.company_key).order_by('-statusdate')
-    positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+    positions_html = render_to_string('positions/_positions_grid.html', {'positions': positions}, request=request)
     return JsonResponse({'ok': True, 'positions_html': positions_html})
 
 
@@ -313,7 +313,7 @@ def position_closed(request, id=None):
 
     # re-render positions grid partial
     positions = Position.objects.filter(company_key=pos.company_key).order_by('-statusdate')
-    positions_html = render_to_string('_positions_grid.html', {'positions': positions}, request=request)
+    positions_html = render_to_string('positions/_positions_grid.html', {'positions': positions}, request=request)
     return JsonResponse({'ok': True, 'positions_html': positions_html})
 
 

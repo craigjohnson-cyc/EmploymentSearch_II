@@ -11,7 +11,7 @@
                 <input type="hidden" name="company_key" value="{{ company_key }}">
                 <button type="submit" class="btn btn-primary">Save</button>
                 <button type="button" class="btn btn-secondary"
-                    onclick="if (history.length > 1) { history.back(); } else { window.location.href={% if company_pk %}'{% url 'company_update' company_pk %}'{% else %}'{% url 'company_list' %}'{% endif %}; }">Exit
+                    onclick="    if (history.length > 1) { history.back(); } else { window.location.href = {% if company_pk %} '{% url 'company_update' company_pk %}'{% else %}'{% url 'companies/company_list' %}'{% endif %}; }">Exit
                 </button>
 
             </form>
