@@ -1,4 +1,12 @@
-<form id="companyForm" method="post" class="form-horizontal">
-    {% csrf_token %}
-    {% include "_company_form_fragment.html" %}
-</form>
+{% comment %} Wrapper used to render company form partials for AJAX updates {% endcomment %}
+
+<div class="company-form-wrapper">
+    <div class="form-group">
+        {{ form.company_display.label_tag }}
+        {{ form.company_display }}
+    </div>
+    <div class="form-group">
+        {{ form.company_key.label_tag }}
+        {{ form.company_key }}
+    </div>
+</div>

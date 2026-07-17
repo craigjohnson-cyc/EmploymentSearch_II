@@ -29,6 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path("company/", views.company_list, name="company_list"),
+    path("company/search/", views.company_search, name="company_search"),
     path("company/create/", views.company_create, name="company_create"),
     path("company/update/<int:id>/", views.company_update, name="company_update"),
     path("company/delete/<int:id>/", views.company_delete, name="company_delete"),

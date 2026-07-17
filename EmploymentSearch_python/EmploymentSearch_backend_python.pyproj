@@ -4,6 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>EmploymentSearch_backend_python</Name>
     <RootNamespace>EmploymentSearch_backend_python</RootNamespace>
+    <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -60,6 +61,7 @@
   <ItemGroup>
     <Content Include="app\static\app\company_form.css" />
     <Content Include="app\templates\companies\_list.html" />
+    <Content Include="app\templates\companies\_search_results.html" />
     <Content Include="app\templates\company_create.html" />
     <Content Include="app\templates\company_form.html" />
     <Content Include="app\templates\company_list.html" />

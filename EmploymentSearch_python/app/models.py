@@ -37,10 +37,10 @@ class Position(models.Model):
     note = models.TextField(db_column='Note', blank=True, db_collation='SQL_Latin1_General_CP1_CI_AS')  
     rate = models.CharField(db_column='Rate', blank=True, max_length=25, db_collation='SQL_Latin1_General_CP1_CI_AS')  
     link = models.TextField(db_column='Link', blank=True, db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    applicationdate = models.DateTimeField(db_column='ApplicationDate')  
-    lastcontactdate = models.DateTimeField(db_column='LastContactDate')  
+    applicationdate = models.DateField(db_column='ApplicationDate', null=True, blank=True)  
+    lastcontactdate = models.DateField(db_column='LastContactDate', null=True, blank=True)  
     status = models.CharField(db_column='Status', blank=True, max_length=10, db_collation='SQL_Latin1_General_CP1_CI_AS')  
-    statusdate = models.DateTimeField(db_column='StatusDate')  
+    statusdate = models.DateField(db_column='StatusDate', null=True, blank=True)  
 
     class Meta:
         managed = False

@@ -10,7 +10,7 @@
   </thead>
   <tbody>
       {% for company in page_obj %}
-      <tr data-href="{% url 'company_update' company.company_key %}">
+      <tr data-href="{% url 'company_update' company.company_key %}" data-company-key="{{ company.company_key }}">
           <td><a href="{% url 'company_update' company.company_key %}">{{ company.companyname }}</a></td>
           <td>{{ company.phone }}</td>
           <td>
@@ -69,3 +69,13 @@
         {% endif %}
     </ul>
 </nav>
+
+{% comment %} Partial list of companies. Each item should include data-company-key for selection. {% endcomment %}
+
+<ul class="list-group">
+{% for company in companies %}
+  <li class="list-group-item" data-company-key="{{ company.pk }}">{{ company.companyname }}</li>
+{% empty %}
+  <li class="list-group-item">No companies found.</li>
+{% endfor %}
+</ul>

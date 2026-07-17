@@ -65,24 +65,16 @@ def company_list(request):
     page_obj = paginator.get_page(page_number)         # safe: handles invalid page numbers
     return render(request, 'company_list.html', {'page_obj': page_obj})
 
-# def company_list(request):
-#     # optional search query (support ?q=...)
-#     q = request.GET.get('q', '').strip()
-#     companies = Company.objects.order_by("companyname")
-#     if q:
-#         companies = companies.filter(companyname__icontains=q)
 
-#     companies_count = companies.count()  # call the method to get an int
+def company_search(request):
+    """AJAX endpoint: return a rendered partial list of companies matching q."""
+    q = request.GET.get('q', '').strip()
+    companies = Company.objects.all().order_by('companyname')
+    if q:
+        companies = companies.filter(companyname__icontains=q)[:20]
+    html = render_to_string('companies/_search_results.html', {'companies': companies}, request=request)
+    return JsonResponse({'ok': True, 'html': html})
 
-#     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-#         # Render partial template for AJAX request
-#         html = render_to_string('companies/_list.html', {'companies': companies}, request=request)
-#         return JsonResponse({'success': True, 'html': html})
-
-#     return render(request, "company_list.html", {
-#         "companies": companies,
-#         "companies_count": companies_count,
-#     })
 
 def company_create(request):
     # Use CompanyForm for consistency with company_update and to provide an empty form for GET
