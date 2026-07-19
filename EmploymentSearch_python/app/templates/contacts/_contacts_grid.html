@@ -1,0 +1,73 @@
+<div id="contacts-grid">
+    {% load static %}
+
+    <style>
+        /* clamp to ~4 lines (15ch width) */
+        .note-clamp {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4; /* show up to 4 lines */
+            overflow: hidden;
+            width: 15ch; /* approx 15 characters wide */
+            word-break: break-word;
+            white-space: normal;
+        }
+
+        /* styled tooltip for full note text */
+        .tooltip-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .styled-tooltip {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            margin-top: 6px;
+            z-index: 2000;
+            background: rgba(0,0,0,0.85);
+            color: #fff;
+            padding: 8px 10px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            max-width: 40ch;
+            display: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+            .styled-tooltip::before {
+                content: "";
+                position: absolute;
+                top: -6px; /* position above the tooltip box */
+                left: 10px; /* align near left edge */
+                border-width: 6px;
+                border-style: solid;
+                border-color: transparent transparent rgba(0,0,0,0.85) transparent;
+            }
+
+        .tooltip-wrapper:hover .styled-tooltip {
+            display: block;
+        }
+    </style>
+
+    <table class="table table-sm table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Type of Contact</th>
+                <th>Contact Date</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.contactmethod }}</td>
+                <td>{{ contact.contactdate }}</td>
+                <td><span class="note-clamp" title="{{ contact.description }}">{{ contact.description }}</span></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">No contacts.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

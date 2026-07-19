@@ -1,0 +1,126 @@
+{% comment %}Partial: Position statistics retrieved from dbo.GetPositionStats and passed as 'position_stats' in context.{% endcomment %}
+
+<!--{% if position_stats %}
+<div class="container mt-3">
+    <h4>Position Statistics</h4>
+    <div class="table-responsive">
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr>
+                    {% for k,v in position_stats.0.items %}
+                    <th>{{ k }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in position_stats %}
+                <tr>
+                    {% for k,v in row.items %}
+                    <td>{{ v }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}-->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Statistics</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <p>Applications sent</p>
+            <p>Today</p>
+            <p id="app-count-today" class="h3 font-weight-bold text-primary">
+                {% if position_stats %}
+                    {{ position_stats.0.appsToday }}
+                {% else %}
+                    0
+                {% endif %}
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p>Applications sent</p>
+            <p>This Week</p>
+            <p id="app-count-week" class="h3 font-weight-bold text-primary">
+                {% if position_stats %}
+                {{ position_stats.0.appsThisWeek }}
+                {% else %}
+                0
+                {% endif %}
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p>Applications sent</p>
+            <p>This Month</p>
+            <p id="app-count-month" class="h3 font-weight-bold text-primary">
+                {% if position_stats %}
+                {{ position_stats.0.appsThisMonth }}
+                {% else %}
+                0
+                {% endif %}
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p>Applications sent</p>
+            <p>This Year</p>
+            <p id="app-count-year" class="h3 font-weight-bold text-primary">
+                {% if position_stats %}
+                {{ position_stats.0.appsThisYear }}
+                {% else %}
+                0
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <p>Rejections Received</p>
+            <p>Today</p>
+            <p id="reject-count-today" class="h3 font-weight-bold text-primary">
+                {% if position_stats %}
+                {{ position_stats.0.rejectsToday }}
+                {% else %}
+                0
+                {% endif %}
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p>Rejections Received</p>
+            <p>This Week</p>
+            <p id="reject-count-week" class="h3 font-weight-bold text-primary">
+                {% if position_stats %}
+                {{ position_stats.0.rejectsThisWeek }}
+                {% else %}
+                0
+                {% endif %}
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p>Rejections Received</p>
+            <p>This Month</p>
+            <p id="reject-count-month" class="h3 font-weight-bold text-primary">
+                {% if position_stats %}
+                {{ position_stats.0.rejectsThisMonth }}
+                {% else %}
+                0
+                {% endif %}
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p>Rejections Received</p>
+            <p>This Year</p>
+            <p id="reject-count-year" class="h3 font-weight-bold text-primary">
+                {% if position_stats %}
+                {{ position_stats.0.rejectsThisYear }}
+                {% else %}
+                0
+                {% endif %}
+            </p>
+        </div>

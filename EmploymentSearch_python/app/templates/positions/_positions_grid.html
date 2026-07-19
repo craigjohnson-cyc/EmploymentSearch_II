@@ -56,7 +56,7 @@
         </thead>
         <tbody>
             {% for pos in positions %}
-            <tr>
+            <tr data-position-key="{{pos.position_key}}" class="position-row">
                 <td>{{ pos.position }}</td>
                 <td><span class="note-clamp" title="{{ pos.note }}">{{ pos.note }}</span></td>
                 <td>{{ pos.rate }}</td>
@@ -75,3 +75,23 @@
         </tbody>
     </table>
 </div>
+
+<script>
+document.addEventListener('click', function(e) {
+  var el = e.target.closest('[data-position-key]');
+  if (!el) return;
+  var key = el.getAttribute('data-position-key');
+  if (!key) return;
+  const url = '/contacts/by-position/?position_key=' + encodeURIComponent(key);
+  fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+    .then(r => r.json())
+    .then(data => {
+      if (data.ok) document.getElementById('contactsGridContainer').innerHTML = data.html;
+      else document.getElementById('contactsGridContainer').innerHTML = '';
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById('contactsGridContainer').innerHTML = '';
+    });
+});
+</script>

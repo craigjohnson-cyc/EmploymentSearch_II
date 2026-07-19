@@ -17,7 +17,7 @@
         <select id="company-select" class="form-control" onchange="if(this.value) window.location.href=this.value;">
             <option value="">-- Select a company --</option>
             {% for company in companies %}
-                <option value="{% url 'company_update' company.company_key %}">{{ company.companyname }}</option>
+            <option value="{% url 'company_update' company.company_key %}">{{ company.companyname }}</option>
             {% endfor %}
         </select>
     </div>
@@ -27,14 +27,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2>OR</h2>
+            <h3>OR</h3>
             <p>Use the search box below to quickly find a company.</p>
 
             <div style="position:relative; max-width:400px;">
                 <form id="companySearchForm" class="m-0" autocomplete="off">
                     <div class="input-group">
                         <input id="companySearchInput" class="form-control" type="search" name="q" placeholder="Search companies..." aria-label="Search companies">
-                        <button id="companySearchBtn" class="btn btn-outline-secondary" type="submit">Search</button>
+                        <!--<button id="companySearchBtn" class="btn btn-outline-secondary" type="submit">Search</button>-->
                     </div>
                 </form>
                 <div id="companySearchResultsAjax" class="dropdown-menu" hidden style="position:absolute; top:100%; left:0; right:0; max-height:300px; overflow:auto;"></div>
@@ -47,98 +47,100 @@
     </div>
 </div>
 
+{% include "app/_statistics.html" %}
+
 <script>
-(function(){
-  // Force-clear results as early as possible to prevent any preloaded markup from showing
-  document.addEventListener('DOMContentLoaded', function(){
-    try{
-      var r = document.getElementById('companySearchResultsAjax');
-      if(r){
-        console.log('[companySearch] initial clear at DOMContentLoaded');
-        r.innerHTML = '';
-        r.hidden = true;
-        r.style.display = 'none';
-      }
-    }catch(e){ console.error(e); }
-  });
-})();
-
-(function(){
-  const input = document.getElementById('companySearchInput');
-  const form = document.getElementById('companySearchForm');
-  const results = document.getElementById('companySearchResultsAjax');
-  const loading = document.getElementById('companySearchLoading');
-  let currentFetch = null;
-  let debounceTimer = null;
-
-  function clearResults(){ if(results){ results.innerHTML = ''; results.hidden = true; results.style.display = 'none'; } }
-  function showLoading(){ loading.style.display = 'block'; }
-  function hideLoading(){ loading.style.display = 'none'; }
-
-  function doSearch(q) {
-      clearResults();  
-    if(!q){ clearResults(); hideLoading(); return; }
-    if(currentFetch && currentFetch.abort) currentFetch.abort();
-    const controller = new AbortController();
-    currentFetch = controller;
-    showLoading();
-    fetch('/company/search/?q=' + encodeURIComponent(q), { headers: { 'X-Requested-With': 'XMLHttpRequest' }, signal: controller.signal })
-      .then(r => r.json())
-      .then(data => {
-        hideLoading();
-        if(!data.ok){ clearResults(); return; }
-        results.innerHTML = data.html || '';
-        results.querySelectorAll('[data-company-key]').forEach(el => {
-          el.addEventListener('click', function(){
-            const key = this.getAttribute('data-company-key');
-            if(!key) return;
-            window.location.href = '/company/update/' + key + '/';
-          });
+    (function () {
+        // Force-clear results as early as possible to prevent any preloaded markup from showing
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                var r = document.getElementById('companySearchResultsAjax');
+                if (r) {
+                    console.log('[companySearch] initial clear at DOMContentLoaded');
+                    r.innerHTML = '';
+                    r.hidden = true;
+                    r.style.display = 'none';
+                }
+            } catch (e) { console.error(e); }
         });
-        results.style.display = results.innerHTML ? 'block' : 'none';
-      })
-      .catch(err => { hideLoading(); if(err.name === 'AbortError') return; console.error(err); clearResults(); });
-  }
+    })();
 
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    const q = input.value.trim();
-    doSearch(q);
-  });
+    (function () {
+        const input = document.getElementById('companySearchInput');
+        const form = document.getElementById('companySearchForm');
+        const results = document.getElementById('companySearchResultsAjax');
+        const loading = document.getElementById('companySearchLoading');
+        let currentFetch = null;
+        let debounceTimer = null;
 
-  // Debounced search on input (optional) and ensure Enter triggers search
-  input.addEventListener('input', function(){
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(function(){
-      const q = input.value.trim();
-      doSearch(q);
-    }, 300);
-  });
+        function clearResults() { if (results) { results.innerHTML = ''; results.hidden = true; results.style.display = 'none'; } }
+        function showLoading() { loading.style.display = 'block'; }
+        function hideLoading() { loading.style.display = 'none'; }
 
-  input.addEventListener('keydown', function(e){
-    if(e.key === 'Enter'){
-      // Some browsers/IME combos may not trigger submit; ensure we run search and blur the input
-      e.preventDefault();
-      console.log('[companySearch] keydown Enter detected');
-      if (typeof form.requestSubmit === 'function') {
-        console.log('[companySearch] using form.requestSubmit');
-        form.requestSubmit();
-      } else {
-        console.log('[companySearch] dispatching submit event');
-        form.dispatchEvent(new Event('submit', { cancelable: true }));
-      }
-      // remove focus so Enter doesn't keep the field active
-      try { input.blur(); } catch(_) {}
-    }
-  });
+        function doSearch(q) {
+            clearResults();
+            if (!q) { clearResults(); hideLoading(); return; }
+            if (currentFetch && currentFetch.abort) currentFetch.abort();
+            const controller = new AbortController();
+            currentFetch = controller;
+            showLoading();
+            fetch('/company/search/?q=' + encodeURIComponent(q), { headers: { 'X-Requested-With': 'XMLHttpRequest' }, signal: controller.signal })
+                .then(r => r.json())
+                .then(data => {
+                    hideLoading();
+                    if (!data.ok) { clearResults(); return; }
+                    results.innerHTML = data.html || '';
+                    results.querySelectorAll('[data-company-key]').forEach(el => {
+                        el.addEventListener('click', function () {
+                            const key = this.getAttribute('data-company-key');
+                            if (!key) return;
+                            window.location.href = '/company/update/' + key + '/';
+                        });
+                    });
+                    results.style.display = results.innerHTML ? 'block' : 'none';
+                })
+                .catch(err => { hideLoading(); if (err.name === 'AbortError') return; console.error(err); clearResults(); });
+        }
 
-  // hide on outside click
-  document.addEventListener('click', function(e){
-    if(!input.contains(e.target) && !results.contains(e.target)){
-      clearResults();
-    }
-  });
-})();
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const q = input.value.trim();
+            doSearch(q);
+        });
+
+        // Debounced search on input (optional) and ensure Enter triggers search
+        input.addEventListener('input', function () {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(function () {
+                const q = input.value.trim();
+                doSearch(q);
+            }, 300);
+        });
+
+        input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                // Some browsers/IME combos may not trigger submit; ensure we run search and blur the input
+                e.preventDefault();
+                console.log('[companySearch] keydown Enter detected');
+                if (typeof form.requestSubmit === 'function') {
+                    console.log('[companySearch] using form.requestSubmit');
+                    form.requestSubmit();
+                } else {
+                    console.log('[companySearch] dispatching submit event');
+                    form.dispatchEvent(new Event('submit', { cancelable: true }));
+                }
+                // remove focus so Enter doesn't keep the field active
+                try { input.blur(); } catch (_) { }
+            }
+        });
+
+        // hide on outside click
+        document.addEventListener('click', function (e) {
+            if (!input.contains(e.target) && !results.contains(e.target)) {
+                clearResults();
+            }
+        });
+    })();
 </script>
 
 {% endblock %}

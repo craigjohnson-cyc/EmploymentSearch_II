@@ -55,16 +55,19 @@
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="app\templates\companies\" />
+    <Folder Include="app\templates\contacts\" />
     <Folder Include="app\templates\positions\" />
     <Folder Include="EmploymentSearch_backend_python\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\static\app\company_form.css" />
+    <Content Include="app\templates\app\_statistics.html" />
     <Content Include="app\templates\companies\_list.html" />
     <Content Include="app\templates\companies\_search_results.html" />
     <Content Include="app\templates\companies\company_create.html" />
     <Content Include="app\templates\companies\company_form.html" />
     <Content Include="app\templates\companies\company_list.html" />
+    <Content Include="app\templates\contacts\_contacts_grid.html" />
     <Content Include="app\templates\positions\_list.html" />
     <Content Include="app\templates\positions\position_form.html" />
     <Content Include="app\templates\companies\_company_form_fragment.html" />

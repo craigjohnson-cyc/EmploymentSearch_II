@@ -175,19 +175,34 @@
                 if (form) form.addEventListener('submit', submitCompanyForm);
                 attachPositionsHandlers();
             });
+
         </script>
 
 
+        <div class="col-md-6">
+            <div id="positionsGridContainer">
+                <h2>
+                    Positions
+                    <button id="positionAdd" {% if company %}data-company-key="{{ company.company_key }}" {% else %}disabled{% endif %} class="btn btn-primary">
+                        Add Position
+                    </button>
+                </h2>
+                {% include "positions/_positions_grid.html" %}
+            </div>
+        </div>
 
         <div class="col-md-6">
             <h2>
-                Positions
-                <button id="positionAdd" {% if company %}data-company-key="{{ company.company_key }}"{% else %}disabled{% endif %} class="btn btn-primary">
-                    Add Position
+                Contacts
+                <button id="contactAdd" class="btn btn-primary">
+                    Add Contact
                 </button>
             </h2>
-            {% include "positions/_positions_grid.html" %}
+            <div id="contactsGridContainer">
+                {% include "contacts/_contacts_grid.html" %}
+            </div>
         </div>
+
     </div>
 </div>
 {% endblock %}

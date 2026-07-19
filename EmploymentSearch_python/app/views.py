@@ -11,15 +11,26 @@ from django.template.loader import render_to_string
 from django.core.paginator import Paginator
 import json
 from django.utils import timezone
+from django.db import connection
 from .forms import CompanyForm, PositionForm
 from .models import Contact, Position, Person, Company
-
 
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
     # include companies for the index dropdown
     companies = Company.objects.all().order_by('companyname')
+    # Retrieve position statistics from stored procedure dbo.GetPositionStats
+    position_stats = []
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("EXEC dbo.GetPositionStats")
+            cols = [c[0] for c in cursor.description] if cursor.description else []
+            rows = cursor.fetchall()
+        position_stats = [dict(zip(cols, r)) for r in rows]
+    except Exception:
+        # Fail silently so home page still renders if proc is unavailable
+        position_stats = []
     return render(
         request,
         'app/index.html',
@@ -27,6 +38,7 @@ def home(request):
             'title': 'Home Page',
             'year': datetime.now().year,
             'companies': companies,
+            'position_stats': position_stats,
         }
     )
 
@@ -183,6 +195,16 @@ def contact_delete(request, id):
     contact.delete()
     return redirect("contact_list")
 
+
+
+
+def contacts_by_position(request):
+    position_key = request.GET.get('position_key')
+    if not position_key:
+        return JsonResponse({'ok': False, 'html': ''})
+    contacts = Contact.objects.filter(position_key=position_key).order_by('contactdate')
+    html = render_to_string('contacts/_contacts_grid.html', {'contacts': contacts}, request=request)
+    return JsonResponse({'ok': True, 'html': html})
 
 # CRUD views for Position model
 
